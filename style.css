@@ -7,3 +7,15 @@ body {
 h1 {
   color: #2c3e50;
 }
+
+img/arrow-right.svg
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn__icon {
+  width: 14px;
+  height: 14px;
+}

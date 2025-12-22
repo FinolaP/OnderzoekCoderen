@@ -17,6 +17,33 @@
       Zometeen krijg je een tekst over het regenboogdieet. Daarna maak je de opdrachten die je helpen om een presentatie te maken over het regenboogdieet. Tot slot krijg je vragen over jouw presentatie.
     </p>
     <h2 class="card_question">Welk template wil je gebruiken voor jouw presentatie?</h2>
+
+    <form class="choices" id="templateForm">
+      <label class="choice">
+        <input type="radio" name="template" value="kleurrijk" />
+        <div class="choice_box>">
+          <img class="choice_img" src="img/template-regenboog_presentatie.png" alt="Kleurrijk ontwerp" />
+          <div class="choice_label">Kleurrijk ontwerp</div>
+          <div class="choice_dot" aria-hidden="true"></div>
+        </div>
+      </label>
+
+      <label class="choice">
+        <input type="radio" name="template" value="stoer" />
+        <div class="choice_box">
+          <img class="choice_img" src="img/template-regenboog_stoer.png" alt="Stoer ontwerp" />
+          <div class="choice_label">Stoer ontwerp</div>
+          <div class="choice_dot" aria-hidden="true"></div>
+        </div>
+      </label>
+    </form>
+
+    <div class="card_actions">
+      <button class="btn" id="nextBtn" disabled>
+        Volgende
+        <img class="btn_icon" src="img/arrow-right.svg" alt="" aria-hidden="true" />
+      </button>
+    </div>
   <script src="script.js"></script>
     </section>
   </main>
