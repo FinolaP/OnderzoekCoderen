@@ -1,21 +1,85 @@
+* { box-sizing: border-box; }
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
-  padding: 40px;
+  margin: 0;
+  font-family: Roboto, Arial, sans-serif;
+  background: #F7F9FA;
+  color: #000;
 }
 
-h1 {
-  color: #2c3e50;
+.page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
 }
 
-img/arrow-right.svg
+.card_title {
+  color:#283643;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 150%;
+  margin: 0;
+}
+
+.card_intro {
+  max-width: 829px; /* use max-width instead of fixed width */
+  margin: 12px auto 22px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 140%;
+  color: #000;
+}
+
+.card__question {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 140%;
+  color: #000;
+  margin: 0 0 14px;
+}
+
+.choice_box {
+  display: flex;
+  height: 447px;
+  padding: 12px 47px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  border-radius: 8px;
+  border: 2px solid #000;
+  background: #fff;
+}
+
+.choice_label {
+  color: #000;
+  text-align: center;
+}
+
 .btn {
   display: inline-flex;
+  justify-content: center;
   align-items: center;
-  gap: 8px;
+
+  padding: 10px 8px;
+  border: none;
+  border-radius: 4px;
+
+  background: #00ADD6;
+  color: #fff;
+
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 140%;
+
+  cursor: pointer;
 }
 
-.btn__icon {
-  width: 14px;
-  height: 14px;
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
+
