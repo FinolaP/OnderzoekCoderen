@@ -18,11 +18,7 @@ body {
 .topbar {
   background: #fff;
   border-bottom: 1px solid #EDEEEF;
-
   padding: 10px 24px;
-
-  display: flex;
-  align-items: center;
 }
 
 .topbar_left {
@@ -30,6 +26,7 @@ body {
   align-items: center;
   gap: 14px;
 }
+
 
 .topbar_title {
   margin: 0;
