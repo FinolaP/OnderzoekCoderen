@@ -19,13 +19,16 @@ body {
   background: #fff;
   border-bottom: 1px solid #EDEEEF;
 
+  padding: 10px 24px;
+
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* icon + text on the left */
-  gap: 14px; /* 14px between icon and title */
+}
 
-  padding: 10px 24px;
-  width: 100%;
+.topbar_left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
 .topbar_title {
