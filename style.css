@@ -11,7 +11,7 @@ body {
 .page {
   min-height: 100vh;
   background: #F7F9FA;
-  padding: 24px; /* space around the white content area */
+  padding: 24px;
 }
 
 /* Header */
@@ -27,7 +27,6 @@ body {
   gap: 14px;
 }
 
-
 .topbar_title {
   margin: 0;
   color: #283643;
@@ -42,42 +41,50 @@ body {
   display: block;
 }
 
-/* Main white container (ONLY for content, not the header) */
-.card {
+/* Main white container (your HTML uses .content) */
+.content {
   width: min(1100px, 100%);
-  margin: 0 auto; /* centered */
+  margin: 0 auto;
   background: #fff;
   padding: 28px 24px 32px;
   border-radius: 12px;
   box-shadow: 0 6px 22px rgba(0,0,0,0.08);
 }
 
-/* Intro text */
-.card_intro {
+/* Figma-like auto layout (24px between blocks) */
+.content_stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+/* Intro text (your HTML uses .intro_text) */
+.intro_text {
   width: min(829px, 100%);
-  margin: 0 auto;           /* centered */
+  margin: 0;
   text-align: center;
   font-size: 20px;
   font-weight: 400;
   line-height: 140%;
 }
 
-/* Question */
-.card_question {
-  margin: 24px 0 0;         /* 24px under intro */
+/* Question text (your HTML uses .question_text) */
+.question_text {
+  margin: 0;
   text-align: center;
   font-size: 20px;
   font-weight: 700;
   line-height: 140%;
 }
 
-/* Template choices layout */
+/* Template choices layout (70px between boxes) */
 .choices {
-  margin-top: 24px;
+  margin: 0; /* spacing is handled by .content_stack gap */
   display: grid;
   grid-template-columns: 523px 523px;
   justify-content: center;
-  gap: 24px;
+  gap: 70px;
 }
 
 /* Whole option clickable */
@@ -86,7 +93,7 @@ body {
   cursor: pointer;
 }
 
-/* Hide the real radio, but keep it clickable via the label */
+/* Hide the real radio, but keep it selectable via label click */
 .choice input {
   position: absolute;
   opacity: 0;
@@ -96,7 +103,6 @@ body {
 .choice_box {
   width: 523px;
   height: 447px;
-
   border-radius: 8px;
   border: 2px solid #000;
   background: #fff;
@@ -138,15 +144,16 @@ body {
   border-color: #000;
 }
 
+/* Optional: keep border black when selected */
 .choice input:checked + .choice_box {
   border-color: #000;
 }
 
-/* Button area */
-.card_actions {
+/* Button area (your HTML uses .actions) */
+.actions {
   display: flex;
   justify-content: flex-end;
-  margin-top: 24px;
+  margin: 0; /* spacing handled by content_stack */
 }
 
 /* Button */
@@ -180,10 +187,11 @@ body {
   display: block;
 }
 
-/* Mobile (remove if you don't want it) */
+/* Mobile (optional) */
 @media (max-width: 1100px) {
   .choices {
     grid-template-columns: 1fr;
+    gap: 24px;
   }
 
   .choice_box {
@@ -191,7 +199,7 @@ body {
     height: auto;
   }
 
-  .card_actions {
+  .actions {
     justify-content: center;
   }
 }
