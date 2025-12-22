@@ -11,20 +11,20 @@ body {
 .page {
   min-height: 100vh;
   background: #F7F9FA;
+  padding: 24px; /* space around the white content area */
 }
 
+/* Header */
 .topbar {
   background: #fff;
   border-bottom: 1px solid #EDEEEF;
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start; /* icon + text on the left */
+  gap: 14px; /* 14px between icon and title */
 
   padding: 10px 24px;
-  gap: 10px;
-
-  /* full width */
   width: 100%;
 }
 
@@ -42,45 +42,41 @@ body {
   display: block;
 }
 
-/* Main white container */
+/* Main white container (ONLY for content, not the header) */
 .card {
   width: min(1100px, 100%);
-  margin: 24px auto;
+  margin: 0 auto; /* centered */
   background: #fff;
   padding: 28px 24px 32px;
   border-radius: 12px;
   box-shadow: 0 6px 22px rgba(0,0,0,0.08);
 }
 
-
 /* Intro text */
 .card_intro {
-  max-width: 829px;
-  margin: 12px auto 22px;
+  width: min(829px, 100%);
+  margin: 0 auto;           /* centered */
   text-align: center;
   font-size: 20px;
   font-weight: 400;
   line-height: 140%;
 }
 
-.card_header {
-  display: flex;
-  justify-content: center; /* or flex-start if you want it left */
-}
-
 /* Question */
 .card_question {
+  margin: 24px 0 0;         /* 24px under intro */
   text-align: center;
   font-size: 20px;
   font-weight: 700;
   line-height: 140%;
-  margin: 0 0 18px;
 }
 
 /* Template choices layout */
 .choices {
+  margin-top: 24px;         /* 24px under question */
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 523px 523px; /* exact widths like Figma */
+  justify-content: center;  /* center the two boxes */
   gap: 24px;
 }
 
@@ -89,8 +85,18 @@ body {
   display: block;
 }
 
+/* (Optional but recommended) hide the real radio circle */
+.choice input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* Box around template */
 .choice_box {
+  width: 523px;
+  height: 447px;
+
   border-radius: 8px;
   border: 2px solid #000;
   background: #fff;
@@ -98,13 +104,14 @@ body {
   padding: 16px;
   display: grid;
   justify-items: center;
+  align-content: center;
   gap: 12px;
 }
 
 /* Template image */
 .choice_img {
   width: 100%;
-  max-width: 440px;
+  max-width: 460px;
   height: auto;
   display: block;
   border-radius: 6px;
@@ -129,7 +136,7 @@ body {
 .card_actions {
   display: flex;
   justify-content: flex-end;
-  margin-top: 20px;
+  margin-top: 24px;
 }
 
 /* Button */
@@ -137,6 +144,7 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
 
   padding: 10px 14px;
   border-radius: 4px;
@@ -149,7 +157,6 @@ body {
   font-weight: 600;
   line-height: 140%;
   cursor: pointer;
-  gap: 8px;
 }
 
 .btn:disabled {
@@ -163,10 +170,15 @@ body {
   display: block;
 }
 
-/* Mobile */
-@media (max-width: 800px) {
+/* Mobile (remove if you don't want it) */
+@media (max-width: 1100px) {
   .choices {
     grid-template-columns: 1fr;
+  }
+
+  .choice_box {
+    width: 100%;
+    height: auto;
   }
 
   .card_actions {
