@@ -73,23 +73,23 @@ body {
 
 /* Template choices layout */
 .choices {
-  margin-top: 24px;         /* 24px under question */
+  margin-top: 24px;
   display: grid;
-  grid-template-columns: 523px 523px; /* exact widths like Figma */
-  justify-content: center;  /* center the two boxes */
+  grid-template-columns: 523px 523px;
+  justify-content: center;
   gap: 24px;
 }
 
 /* Whole option clickable */
 .choice {
   display: block;
+  cursor: pointer;
 }
 
-/* (Optional but recommended) hide the real radio circle */
+/* Hide the real radio, but keep it clickable via the label */
 .choice input {
   position: absolute;
   opacity: 0;
-  pointer-events: none;
 }
 
 /* Box around template */
@@ -124,12 +124,22 @@ body {
   text-align: center;
 }
 
-/* Selection dot */
+/* Dot (default: empty) */
 .choice_dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
   border: 1.5px solid #777;
+}
+
+/* Dot turns black when selected */
+.choice input:checked + .choice_box .choice_dot {
+  background: #000;
+  border-color: #000;
+}
+
+.choice input:checked + .choice_box {
+  border-color: #000;
 }
 
 /* Button area */
