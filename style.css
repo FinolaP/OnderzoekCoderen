@@ -211,3 +211,12 @@ margin: 0;
     justify-content: center;
   }
 }
+
+/* regenboog afbeelding */
+.leestekst_image {
+  width: 100%;              /* align-self: stretch */
+  max-width: 805px;         /* Figma breedte */
+  height: auto;             /* behoud verhouding */
+  aspect-ratio: 805 / 472.16;
+  display: block;
+}
