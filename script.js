@@ -17,3 +17,24 @@ radios.forEach(function (radio) {
 nextBtn.addEventListener("click", function () {
   window.location.href = "leestekst.html";
 });
+
+
+// All steps
+const steps = document.querySelectorAll(".text_step");
+
+steps.forEach(function (step, index) {
+  const btn = step.querySelector("[data-next]");
+  if (!btn) return;
+
+  btn.addEventListener("click", function () {
+    // hide current
+    step.classList.remove("is_visible");
+
+    // show next (if it exists)
+    const nextStep = steps[index + 1];
+    if (nextStep) {
+      nextStep.classList.add("is_visible");
+      nextStep.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+});
