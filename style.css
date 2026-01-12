@@ -265,7 +265,7 @@ p {
 .app_layout {
   width: min(1366px, 100%);
   margin: 0 auto;
-
+  background: #FFF;
   display: flex;
   flex-direction: column;
   align-items: center;
