@@ -250,3 +250,13 @@ p {
   align-items: center;     /* items centered like Figma */
   gap: 16px;               /* space between items */
 }
+
+.app_layout {
+  width: 1366px;
+  margin: 0 auto;          /* center het hele frame op de pagina */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 53px;
+}
