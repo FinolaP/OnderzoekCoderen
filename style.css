@@ -239,3 +239,14 @@ p {
   aspect-ratio: 805 / 472.16;
   display: block;
 }
+
+/* autolayout wrapper */
+.leestekst_wrap {
+  width: 823px;
+  margin: 0 auto;          /* center the whole block on the page */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;     /* items centered like Figma */
+  gap: 16px;               /* space between items */
+}
