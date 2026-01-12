@@ -9,13 +9,17 @@ body {
 
 /* Page */
 .page {
-  min-height: 100vh;
+  min-height: calc(100vh - 60px);
   background: #F7F9FA;
-  padding: 24px;
+  padding: 0 24px 24px; /* no top padding, gap is handled by app_layout */
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 /* Header */
 .topbar {
+  width: 100%;
   background: #fff;
   border-bottom: 1px solid #EDEEEF;
   padding: 10px 24px;
@@ -76,12 +80,13 @@ body {
 }
 /* Leestekst title */
 .leestekst_title {
-color: #000;
-font-family: Roboto, Arial, sans-serif;
-font-size: 36px;
-font-weight: 700;
-line-height: 140%;
-margin: 0;
+  color: #000;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 140%;
+  margin: 0;
+  text-align: left;
 }
 
 .leestekst_bijschrift {
@@ -233,27 +238,33 @@ p {
 
 /* regenboog afbeelding */
 .leestekst_image {
-  width: 100%;              /* align-self: stretch */
-  max-width: 805px;         /* Figma breedte */
-  height: auto;             /* behoud verhouding */
+  width: 100%;
+  max-width: 805px;
+  height: auto;
   aspect-ratio: 805 / 472.16;
   display: block;
 }
 
+
 /* autolayout wrapper */
 .leestekst_wrap {
   width: 823px;
-  margin: 0 auto;          /* center the whole block on the page */
+  max-width: 100%;
+  margin: 0 auto;
 
   display: flex;
   flex-direction: column;
-  align-items: center;     /* items centered like Figma */
-  gap: 16px;               /* space between items */
+  align-items: center;
+  gap: 16px;
+}
+
+.leestekst_wrap > * {
+  width: 100%; /* make each item fill the 823px column */
 }
 
 .app_layout {
-  width: 1366px;
-  margin: 0 auto;          /* center het hele frame op de pagina */
+  width: min(1366px, 100%);
+  margin: 0 auto;
 
   display: flex;
   flex-direction: column;
