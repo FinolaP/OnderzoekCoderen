@@ -74,6 +74,17 @@ body {
   font-weight: 700;
   line-height: 140%;
 }
+/* Leestekst title */
+.leestekst_title {
+color: #000;
+font-family: Roboto, Arial, sans-serif;
+font-size: 36px;
+font-weight: 700;
+line-height: 140%;
+margin: 0;
+}
+
+
 
 /* Template choices layout (70px between boxes) */
 .choices {
