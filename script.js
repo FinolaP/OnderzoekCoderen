@@ -1,12 +1,11 @@
 console.log("JavaScript werkt");
 
-// 1. Elementen ophalen
-const form = document.getElementById("templateForm");
+const radios = document.querySelectorAll('input[type="radio"]');
 const nextBtn = document.getElementById("nextBtn");
 
-//2. veranderingen bijhouden formulier 
-
-form.addEventListener("change", function () {
-  console.log("Er is iets veranderd in het formulier");
+radios.forEach(function (radio) {
+  radio.addEventListener("change", function () {
+    console.log("Radio geselecteerd:", radio.value);
+    nextBtn.disabled = false;
+  });
 });
-
