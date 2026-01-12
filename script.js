@@ -27,14 +27,13 @@ steps.forEach(function (step, index) {
   if (!btn) return;
 
   btn.addEventListener("click", function () {
-    // hide current
-    step.classList.remove("is_visible");
-
-    // show next (if it exists)
     const nextStep = steps[index + 1];
     if (nextStep) {
       nextStep.classList.add("is_visible");
       nextStep.scrollIntoView({ behavior: "smooth", block: "start" });
     }
+
+    // optional: hide the arrow button after clicking
+    btn.style.display = "none";
   });
 });
