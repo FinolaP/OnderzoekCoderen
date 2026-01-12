@@ -7,10 +7,13 @@ body {
   color: #000;
 }
 
+.leestekst_page {
+  background: #ffff; /* wit */
+}
+
 /* Page */
 .page {
   min-height: calc(100vh - 60px);
-  background: #F7F9FA;
   padding: 0 24px 24px; /* no top padding, gap is handled by app_layout */
   width: 100%;
   display: flex;
