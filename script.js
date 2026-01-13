@@ -38,9 +38,10 @@ steps.forEach(function (step, index) {
   });
 });
 
-/* volgende button onder de tekst gaat naar opdracht1.html */
+/* volgende button onder de tekst gaat naar opdracht1.html 
 const nextBtn = document.getElementById("nextBtn");
 
 nextBtn.addEventListener("click", function () {
   window.location.href = "opdracht1.html";
 });
+*/
