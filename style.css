@@ -312,3 +312,28 @@ p {
   height: 60.562px;
   display: block;
 }
+
+.opdrachttekst {
+  width: 691px;
+  max-width: 100%;
+  background: #fff;
+
+  padding: 32px;
+  border-radius: 12px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.leestekst_paragraph {
+  font-size: 18px;
+  line-height: 140%;
+  margin: 0;
+}
+
+.leestekst_paragraph.highlight {
+  background: #FFF3BF;
+  padding: 16px;
+  border-radius: 6px;
+}

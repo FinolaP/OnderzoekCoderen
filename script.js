@@ -1,47 +1,49 @@
 // Check of JavaScript geladen is
 console.log("JavaScript werkt");
 
-// Radio buttons en 'Volgende'-knop ophalen
+/*   INDEX.HTML – RADIO KEUZE*/
+
+// Alleen uitvoeren als er radio buttons bestaan (index.html)
 const radios = document.querySelectorAll('input[type="radio"]');
 const nextBtn = document.getElementById("nextBtn");
 
-// Activeer de knop zodra een keuze is gemaakt
-radios.forEach(function (radio) {
-  radio.addEventListener("change", function () {
-    console.log("Radio geselecteerd:", radio.value);
-    nextBtn.disabled = false;
+if (radios.length && nextBtn) {
+  radios.forEach(function (radio) {
+    radio.addEventListener("change", function () {
+      console.log("Radio geselecteerd:", radio.value);
+      nextBtn.disabled = false;
+    });
   });
-});
 
-// Ga naar de volgende pagina bij klik op de knop
-nextBtn.addEventListener("click", function () {
-  window.location.href = "leestekst.html";
-});
+  nextBtn.addEventListener("click", function () {
+    window.location.href = "leestekst.html";
+  });
+}
 
+/*   LEESTEKST.HTML – TEKSTSTAPPEN*/
 
-// All steps
 const steps = document.querySelectorAll(".text_step");
 
-steps.forEach(function (step, index) {
-  const btn = step.querySelector("[data-next]");
-  if (!btn) return;
+if (steps.length) {
+  steps.forEach(function (step, index) {
+    const btn = step.querySelector("[data-next]");
+    if (!btn) return;
 
-  btn.addEventListener("click", function () {
-    const nextStep = steps[index + 1];
-    if (nextStep) {
-      nextStep.classList.add("is_visible");
-      nextStep.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    btn.addEventListener("click", function () {
+      const nextStep = steps[index + 1];
+      if (nextStep) {
+        nextStep.classList.add("is_visible");
+        nextStep.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
 
-    // optional: hide the arrow button after clicking
-    btn.style.display = "none";
+      // pijlknop verbergen na klik
+      btn.style.display = "none";
+    });
   });
-});
+}
 
-/* volgende button onder de tekst gaat naar opdracht1.html 
-const nextBtn = document.getElementById("nextBtn");
+/* LEESTEKST.HTML – BLAUWE VOLGENDE KNOP*/
 
-nextBtn.addEventListener("click", function () {
-  window.location.href = "opdracht1.html";
-});
-*/
+leestekstVolgende.addEventListener("click", function () {
+    window.location.href = "opdracht1.html";
+  });
