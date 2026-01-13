@@ -8,7 +8,15 @@
 </head>
 
 <body>
-    <p>hier staat tekst</p>
+      <header class="topbar">
+    <div class="topbar_left">
+      <img class="topbar_icon" src="img/book.svg" alt="" aria-hidden="true" />
+      <h1 class="topbar_title">Cito Leestoets</h1>
+    </div>
+  </header>
+
+<div class="opdracht_layout">
+
 <section class="opdrachttekst">
   <h1 class="leestekst_title">
     Het regenboogdieet: hoe meer kleuren hoe beter?
@@ -52,6 +60,61 @@
   </p>
 </section>
 
+<aside class="opdracht_panel">
+
+  <!-- Intro -->
+  <p class="opdracht_intro">
+    Je gaat jouw presentatie over het regenboogdieet aanvullen met extra informatie.
+    Elke keer als je een vraag beantwoordt, wordt jouw antwoord toegevoegd aan de presentatie.
+  </p>
+
+  <!-- Vraag -->
+  <h2 class="opdracht_vraag">
+    Wat is de hoofdzaak van de eerste alinea?
+  </h2>
+
+  <!-- Multiple choice -->
+  <form class="opdracht_vragen" id="vraag1">
+    <label>
+      <input type="radio" name="vraag1" value="A">
+      De supermarkt wil mensen laten geloven dat eten volgens het regenboogdieet gezond is,
+      maar de schrijver vraagt zich af of dat echt klopt
+    </label>
+
+    <label>
+      <input type="radio" name="vraag1" value="B">
+      Het regenboogdieet is een manier van eten waarbij je alle kleuren groenten en fruit moet eten
+    </label>
+
+    <label>
+      <input type="radio" name="vraag1" value="C">
+      De supermarkt verkoopt gezonde producten, zoals een wintergroentenmix
+    </label>
+
+    <label>
+      <input type="radio" name="vraag1" value="D">
+      De schrijver vindt dat reclames over gezond eten niet te vertrouwen zijn
+    </label>
+  </form>
+
+  <!-- Presentatie -->
+  <h3 class="presentatie_titel">Jouw presentatie</h3>
+
+  <div class="presentatie_mockup">
+  <img
+    src="img/Template_presentatie.png"
+    alt="Presentatie template"
+    class="presentatie_image"
+  />
+
+  <div class="presentatie_content">
+    <p id="presentatie_tekst"></p>
+  </div>
+</div>
+
+
+</aside>
+</div>
 
 <script src="script.js"></script>
 </body>
