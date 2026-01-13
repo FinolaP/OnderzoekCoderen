@@ -211,8 +211,35 @@ p {
   cursor: pointer;
 }
 
+.btn_secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 14px;
+
+  background: #fff;
+  border: 1px solid #C3C8CD;
+  border-radius: 4px;
+
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  cursor: pointer;
+  color: #000;
+  line-height: 140%;
+}
+
 .btn:disabled {
-  opacity: 0.5;
+  background: #DCDEE0;       /* Neutrals-70 */
+  color: #91A3B5;            /* Neutrals-200 */
+  border-radius: 4px;
+
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 140%;
+
   cursor: not-allowed;
 }
 
@@ -323,7 +350,7 @@ p {
 .leestekst_paragraph {
   font-size: 18px;
   line-height: 140%;
-  margin: 0;
+  margin-bottom: 12px;
 }
 
 .leestekst_paragraph.highlight {
@@ -332,20 +359,29 @@ p {
   border-radius: 6px;
 }
 
+
+
 .opdracht_panel {
   width: 632px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 0px;
 }
 
 .opdracht_intro {
-  font-size: 14px;
-  line-height: 1.4;
+.opdracht_tekst {
+  color: #000;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%;
+}
+
 }
 
 .opdracht_vraag {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
 }
 
@@ -400,4 +436,30 @@ p {
   font-style: normal;
   font-weight: 400;
   line-height: 140%;
+}
+
+/* =========================
+   FIX: Volgende-knoppen niet uitrekken
+========================= */
+
+button.btn {
+  width: auto;
+  align-self: flex-start;
+}
+
+/* Specifiek: knop in rechter opdracht panel rechts uitlijnen */
+.opdracht_panel button.btn {
+  align-self: flex-end;
+  margin-top: 24px;
+}
+
+
+.btn_icon_left {
+  display: flex;
+  width: 16px;
+  height: 16px;
+
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }

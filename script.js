@@ -81,4 +81,122 @@ if (presentatieTekst && vraag1Radios.length) {
   });
 }
 
-console.log("Script reached the end");
+
+/* =========================
+   OPDRACHT1 – VOLGENDE KNOP
+========================= */
+
+const opdracht1Volgende = document.getElementById("opdracht1_volgende");
+
+if (opdracht1Volgende) {
+  opdracht1Volgende.addEventListener("click", function () {
+    window.location.href = "opdracht2.html";
+  });
+}
+
+/* =========================
+   OPDRACHT2 – RADIO → PRESENTATIE
+========================= */
+
+const presentatieTekst2 = document.getElementById("presentatie_tekst_2");
+const vraag2Radios = document.querySelectorAll('input[name="vraag2"]');
+
+if (presentatieTekst2 && vraag2Radios.length) {
+  vraag2Radios.forEach(function (radio) {
+    radio.addEventListener("change", function () {
+      const teksten = {
+        A: "In het regenboogdieet mag je geen zuivel of granen eten",
+        B: "Veel mensen bouwen hun eetgewonens op rond het regenboogdieet, omdat het erg populair is",
+        C: "Volgens hoogleraar Renger Witkamp is het regenboogdieet te eenzijdig, omdat je dan andere geonde producten, zoals zuivel en granen, mist",
+        D: "Renger Witkmap vindt het regenboogdieet ongezond en raadt het af om te volgen"
+      };
+
+      presentatieTekst2.textContent = teksten[radio.value] || "";
+    });
+  });
+}
+
+
+/* =========================
+   OPDRACHT2 – VOLGENDE KNOP
+========================= */
+
+const opdracht2Volgende = document.getElementById("opdracht2_volgende");
+
+if (opdracht2Volgende) {
+  opdracht2Volgende.addEventListener("click", function () {
+    window.location.href = "opdracht3.html";
+  });
+}
+
+/* =========================
+   OPDRACHT3 – RADIO → PRESENTATIE
+========================= */
+
+const presentatieTekst3 = document.getElementById("presentatie_tekst_3");
+const vraag3Radios = document.querySelectorAll('input[name="vraag3"]');
+
+if (presentatieTekst3 && vraag3Radios.length) {
+  vraag3Radios.forEach(function (radio) {
+    radio.addEventListener("change", function () {
+      const teksten = {
+        A: "Gekleurde groenten en fruit zijn gezond, maar het regenboogdieet garandeert niet automatisch een goede gezondheid.",
+        B: "Wie veel kleuren eet, is gezonder dan mensen die dat niet doen.",
+        C: "In onderzoeken is bewezen dat het regenboogdieet beter is dan andere diëten.",
+        D: "Alleen mensen die veel bewegen hoeven niet op hun eten te letten."
+      };
+
+      presentatieTekst3.textContent = teksten[radio.value] || "";
+    });
+  });
+}
+
+/* =========================
+   OPDRACHT 3 – VOLGENDE KNOP
+========================= */
+
+const opdracht3Volgende = document.getElementById("opdracht3_volgende");
+
+if (opdracht3Volgende) {
+  opdracht3Volgende.addEventListener("click", function () {
+    window.location.href = "opdracht4.html";
+  });
+}
+
+console.log("Script geladen");
+
+/* =========================
+   OPDRACHT4 – RADIO → PRESENTATIE
+========================= */
+
+const presentatieTekst4 = document.getElementById("presentatie_tekst_4");
+const vraag4Radios = document.querySelectorAll('input[name="vraag4"]');
+
+if (presentatieTekst4 && vraag4Radios.length) {
+  vraag4Radios.forEach(function (radio) {
+    radio.addEventListener("change", function () {
+      const teksten = {
+        A: "Het regenboogdieet is te duur om gezond te kunnen eten",
+        B: "Mensen die het regeboogdieet volgen, hoeven niet meer naar de supermarkt",
+        C: "Volgens Witkamp moet iedereen het regenboogdieet volgen om gezond te blijven",
+        D: "Het regenboogdieet is een prima richtlijn zolang je gevarieerd eet, al kan het wat duurder zijn."
+      };
+
+      presentatieTekst4.textContent = teksten[radio.value] || "";
+    });
+  });
+}
+
+/* =========================
+   OPDRACHT 4 – VOLGENDE KNOP
+========================= */
+
+const opdracht4Volgende = document.getElementById("opdracht4_volgende");
+
+if (opdracht4Volgende) {
+  opdracht4Volgende.addEventListener("click", function () {
+    window.location.href = "waarschuwing.html";
+  });
+}
+
+console.log("Script geladen");
