@@ -1,5 +1,5 @@
 // Check of JavaScript geladen is
-console.log("JavaScript werkt");
+console.log("JavaScript gestart");
 
 /* =========================
    INDEX.HTML – RADIO KEUZE
@@ -163,8 +163,6 @@ if (opdracht3Volgende) {
   });
 }
 
-console.log("Script geladen");
-
 /* =========================
    OPDRACHT4 – RADIO → PRESENTATIE
 ========================= */
@@ -199,4 +197,62 @@ if (opdracht4Volgende) {
   });
 }
 
-console.log("Script geladen");
+/* javascript om knop te activeren als checkbox is aangeklikt */
+const begrijpCheck = document.getElementById("begrijp_check");
+const begrijpVolgende = document.getElementById("begrijp_volgende");
+
+if (begrijpCheck && begrijpVolgende) {
+  // checkbox → knop aan/uit
+  begrijpCheck.addEventListener("change", function () {
+    begrijpVolgende.disabled = !begrijpCheck.checked;
+  });
+
+  // klik op knop → naar volgende pagina
+  begrijpVolgende.addEventListener("click", function () {
+    if (!begrijpVolgende.disabled) {
+      window.location.href = "Laatstetekst.html";
+    }
+  });
+}
+
+// Begrijp → volgende (naar conceptmap.html)
+const begrijpVolgendeBtn = document.getElementById("begrijp_volgende");
+
+if (begrijpVolgendeBtn) {
+  begrijpVolgendeBtn.addEventListener("click", function () {
+    window.location.href = "conceptmap.html";
+  });
+}
+
+/* =========================
+   CONCEPTMAP – TIMER + TAG KOPPELING
+========================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+  const conceptmapVolgende = document.getElementById("conceptmap_volgende");
+  const timeTag = document.getElementById("time_tag");
+
+  if (conceptmapVolgende) {
+    setTimeout(function () {
+      conceptmapVolgende.disabled = false;
+
+      // tag zacht laten verdwijnen
+      if (timeTag) {
+        timeTag.style.opacity = "0";
+
+        setTimeout(function () {
+          timeTag.style.display = "none";
+        }, 300);
+      }
+    }, 2000);// ⬅️ 2 seconden
+  }
+});
+
+/*=========== concept map volgende knop ============*/
+const conceptmap_volgende = document.getElementById("conceptmap_volgende");
+
+if (conceptmap_volgende) {
+  conceptmap_volgende.addEventListener("click", function () {
+    window.location.href = "opdracht5.html";
+  });
+}

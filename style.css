@@ -203,8 +203,7 @@ p {
   border: none;
 
   background: #00ADD6;
-  color: #fff;
-
+  color: white;
   font-size: 18px;
   font-weight: 600;
   line-height: 140%;
@@ -247,6 +246,7 @@ p {
   width: 16px;
   height: 16px;
   display: block;
+  color: white;
 }
 
 /* Mobile (optional) */
@@ -369,16 +369,15 @@ p {
 }
 
 .opdracht_intro {
-.opdracht_tekst {
   color: #000;
   font-family: Roboto, Arial, sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 140%;
 }
 
-}
+
 
 .opdracht_vraag {
   font-size: 18px;
@@ -458,8 +457,252 @@ button.btn {
   display: flex;
   width: 16px;
   height: 16px;
-
+  color: white;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+}
+
+/* Buitenste container van deze pagina */
+.bevestiging_container {
+  width: 571px;
+  max-width: calc(100% - 48px);
+  margin: 0 auto;              /* <-- dit centreert */
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+/* Intro + checkbox + buttons */
+.bevestiging_content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Checkbox + tekst netjes naast elkaar */
+.bevestiging_check {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+/* Buttons naast elkaar */
+.bevestiging_buttons {
+  display: flex;
+  flex-direction: row;         /* <-- cruciaal */
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}
+
+/* Afbeelding onderaan */
+.powerpoint_afbeelding {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.btn:disabled .btn_icon path {
+  fill: #91A3B5;
+}
+
+/* =========================
+   Concept map container
+========================= */
+.conceptmap {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* SVG overlay for arrows (later) */
+.conceptmap_lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* =========================
+   Concept map layout
+========================= */
+
+/* Vertical flow: statement → arguments → conclusion */
+.conceptmap_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+}
+
+/* Two-column arguments row */
+.conceptmap_arguments {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  gap: 80px;
+}
+
+/* Each argument column */
+.argument_column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+}
+
+/* Row of 3 input blocks */
+.argument_inputs {
+  display: flex;
+  align-items: center;
+  gap: 38px;
+  flex-wrap: wrap; /* responsive fallback */
+  justify-content: center;
+}
+
+/* =========================
+   Statement & labels
+========================= */
+
+.conceptmap_statement {
+  display: inline-flex;
+  min-height: 80px;
+  padding: 16px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: 8px;
+  border: 1px solid #000;
+  background: #fff;
+
+  color: #000;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 150%;
+  text-align: center;
+}
+
+.argument_label {
+  display: inline-flex;
+  min-height: 66px;
+  padding: 10px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: 8px;
+  border: 1px solid #000;
+  background: #fff;
+
+  color: #000;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 150%;
+  text-align: center;
+}
+
+/* =========================
+   Editable input blocks
+========================= */
+
+.input_block {
+  display: flex;
+  width: 136px;
+  min-height: 165px;
+  padding: 8px;
+
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  border-radius: 8px;
+  border: 1px solid #000;
+
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 140%;
+
+  cursor: text;
+}
+
+/* Larger conclusion block */
+.input_block.large {
+  width: min(100%, 820px);
+  min-height: 96px;
+}
+
+/* Focus state */
+.input_block:focus {
+  outline: 2px solid #00ADD6;
+  outline-offset: 0;
+}
+
+/* Placeholder for contenteditable */
+.input_block:empty::before {
+  content: attr(data-placeholder);
+  color: #8A8A8A;
+  pointer-events: none;
+}
+
+/* =========================
+   Responsive adjustments
+========================= */
+
+@media (max-width: 900px) {
+  .conceptmap_arguments {
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+  }
+}
+
+.conceptmap_conclusion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px; 
+}
+
+.statement_wrapper {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.time_tag {
+  display: inline-flex;
+  padding: 10px 14px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+
+  background-color: #fff;  /* maakt het zichtbaar */
+  border-radius: 6px;
+  border: 1px solid #000;
+}
+
+.time_tag p {
+  color: #000;
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.time_tag {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.quiz_left img {
+width: 898px;
+height: 561px;
+aspect-ratio: 898/561;
 }

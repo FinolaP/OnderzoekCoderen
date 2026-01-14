@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cito Leestoets</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar_left">
+      <img class="topbar_icon" src="img/book.svg" alt="" aria-hidden="true" />
+      <h1 class="topbar_title">Cito Leestoets</h1>
+    </div>
+  </header>
+
+<p class="opdracht_intro">
+  De concept map is nog niet compleet. Vul de ontbrekende onderdelen aan.
+  Je moet minstens 5 minuten aan deze opdracht werken. Daarna mag je verder
+  naar de volgende opdracht. Als je doorgaat, kun je niet meer terug.
+</p>
+
+<section class="conceptmap">
+
+  <!-- CONTENT (layout only) -->
+  <div class="conceptmap_content">
+
+    <!-- STATEMENT + ARROWS (anchored together) -->
+  <div class="statement_wrapper">
+
+    <!-- STATEMENT -->
+    <div class="conceptmap_statement">
+      Eten volgens de regenboog is een goede richtlijn
+    </div>
+
+  </div>
+
+    <!-- ARGUMENTS ROW -->
+    <div class="conceptmap_arguments">
+
+      <!-- ARGUMENTEN VOOR -->
+      <div class="argument_column">
+        <div class="argument_label">Argumenten voor</div>
+
+        <div class="argument_inputs">
+          <div class="input_block" contenteditable="true" data-placeholder="klik om te typen"></div>
+          <div class="input_block" contenteditable="true" data-placeholder="klik om te typen"></div>
+          <div class="input_block" contenteditable="true" data-placeholder="klik om te typen"></div>
+        </div>
+      </div>
+
+      <!-- ARGUMENTEN TEGEN -->
+      <div class="argument_column">
+        <div class="argument_label">Argumenten tegen</div>
+
+        <div class="argument_inputs">
+          <div class="input_block" contenteditable="true" data-placeholder="klik om te typen"></div>
+          <div class="input_block" contenteditable="true" data-placeholder="klik om te typen"></div>
+          <div class="input_block" contenteditable="true" data-placeholder="klik om te typen"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CONCLUSIE -->
+    <div class="conceptmap_conclusion">
+      <div class="argument_label">Conclusie</div>
+      <div class="input_block large" contenteditable="true" data-placeholder="klik om te typen"></div>
+    </div>
+
+  </div>
+
+  <div class="conceptmap_action_wrapper">
+    <section class="time_tag" id="time_tag">
+      <p>Je kunt nog niet verder</p>
+    </section>
+
+    <button type="button" class="btn" id="conceptmap_volgende" disabled>
+      Volgende
+      <img class="btn_icon" src="img/arrow-right.svg" alt="" aria-hidden="true" />
+    </button>
+</div>
+</body>
+<script src="script.js"></script>
+</html>
