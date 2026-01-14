@@ -256,3 +256,27 @@ if (conceptmap_volgende) {
     window.location.href = "opdracht5.html";
   });
 }
+
+/* =========================
+   OPDRACHT 5 – VOLGENDE KNOP
+========================= */
+
+const opdracht5Volgende = document.getElementById("opdracht5_volgende");
+
+if (opdracht5Volgende) {
+  opdracht5Volgende.addEventListener("click", function () {
+    window.location.href = "opdracht6.html";
+  });
+}
+
+/* =========================
+   OPDRACHT 6 – VOLGENDE KNOP
+========================= */
+
+const opdracht6Volgende = document.getElementById("opdracht6_volgende");
+
+if (opdracht6Volgende) {
+  opdracht6Volgende.addEventListener("click", function () {
+    window.location.href = "opdracht7.html";
+  });
+}

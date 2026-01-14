@@ -706,3 +706,38 @@ width: 898px;
 height: 561px;
 aspect-ratio: 898/561;
 }
+
+.answer_option {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.answer_option input {
+  margin-top: 4px;
+}
+
+.quiz_page {
+  display: flex;
+  height: calc(100vh - var(--header-height, 64px));
+}
+
+.quiz_left {
+  flex: 1;
+  background: #f6f6f6; /* or image */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quiz_right {
+  width: 420px; /* fixed column like in your screenshot */
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+}
+
