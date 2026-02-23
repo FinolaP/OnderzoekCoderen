@@ -280,3 +280,110 @@ if (opdracht6Volgende) {
     window.location.href = "opdracht7.html";
   });
 }
+
+/* =========================
+ Debat_index.html – VOLGENDE KNOP
+========================= */
+
+const templateForm = document.getElementById("templateForm");
+const debatIndexVolgende = document.getElementById("debat_index_volgende");
+
+if (templateForm && debatIndexVolgende) {
+
+  const radioButtons = templateForm.querySelectorAll('input[name="template"]');
+
+  // When a radio button is selected → enable button
+  radioButtons.forEach(function(radio) {
+    radio.addEventListener("change", function() {
+      debatIndexVolgende.disabled = false;
+    });
+  });
+
+  // When clicking button → go to next page
+  debatIndexVolgende.addEventListener("click", function() {
+    if (!debatIndexVolgende.disabled) {
+      window.location.href = "VolgendePagina.html"; // change this
+    }
+  });
+
+}
+
+const debat_index_volgende = document.getElementById("debat_index_volgende");
+
+if (debat_index_volgende) {
+  debat_index_volgende.addEventListener("click", function () {
+    window.location.href = "Debat_tekst.html";
+  });
+}
+
+/* =========================
+    DEBAT_TEKST.HTML – VOLGENDE KNOP  en vorige
+========================= */
+
+const debat_tekst_volgende = document.getElementById("debat_tekst_volgende");
+if (debat_tekst_volgende) {
+  debat_tekst_volgende.addEventListener("click", function () {
+    window.location.href = "Debat_opdracht1.html";
+  });
+}
+
+/*==============
+Debat opdracht 1 volgende knop
+=================*/
+const debat_opdracht1_volgende = document.getElementById("debatopdracht1_volgende");
+if (debat_opdracht1_volgende) {
+  debat_opdracht1_volgende.addEventListener("click", function () {
+    window.location.href = "Debat_tekstweghalen.html";
+  });
+}
+/* ===============
+  tekst weghalen vorige
+================= */
+
+const tekstweghalen_vorige = document.getElementById("tekstweghalen_vorige");
+if (tekstweghalen_vorige) {
+  tekstweghalen_vorige.addEventListener("click", function () {  
+    window.location.href = "Debat_opdracht1.html";
+  });
+}
+
+const tekstweghalen_volgende = document.getElementById("tekstweghalen_volgende");
+if (tekstweghalen_volgende) {
+  tekstweghalen_volgende.addEventListener("click", function () {
+    window.location.href = "Debat_tekst_2.html";
+  });
+}
+
+const checkbox = document.getElementById("begrijp_check_tekst");
+const button = document.getElementById("tekstweghalen_volgende");
+
+if (checkbox && button) {
+  checkbox.addEventListener("change", () => {
+    button.disabled = !checkbox.checked;
+  });
+}
+
+console.log(checkbox, button);
+
+/* ===============
+modal
+================= */
+const openBtn = document.getElementById("Debat_tekst_2_volgende");
+const modal = document.getElementById("modal_lezen");
+const naarOpdracht = document.getElementById("naar_opdracht");
+
+if (openBtn && modal) {
+  openBtn.onclick = () => modal.hidden = false;
+
+  modal.onclick = (e) => {
+    if (e.target.dataset.close !== undefined) {
+      modal.hidden = true;
+    }
+  };
+}
+
+if (naarOpdracht) {
+  naarOpdracht.onclick = () => {
+    window.location.href = "Debat_1.html";
+  };
+}

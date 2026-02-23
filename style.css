@@ -153,7 +153,11 @@ p {
 .choice_img {
   width: 100%;
   max-width: 460px;
-  height: auto;
+
+  height: auto;        /* <-- important */
+  max-height: 300px;   /* <-- important, tweak if needed */
+
+  object-fit: contain;
   display: block;
   border-radius: 6px;
 }
@@ -208,6 +212,7 @@ p {
   font-weight: 600;
   line-height: 140%;
   cursor: pointer;
+   margin-left: auto;
 }
 
 .btn_secondary {
@@ -216,7 +221,7 @@ p {
   justify-content: center;
   gap: 8px;
   padding: 9px 14px;
-
+  flex-direction: row-reverse;
   background: #fff;
   border: 1px solid #C3C8CD;
   border-radius: 4px;
@@ -247,6 +252,12 @@ p {
   height: 16px;
   display: block;
   color: white;
+}
+
+.btn_wrapper{
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
 }
 
 /* Mobile (optional) */
@@ -740,4 +751,80 @@ aspect-ratio: 898/561;
   justify-content: space-between;
   background-color: white;
 }
+/* =========================
+   Checkbox layout  
+========================= */
 
+.checkbox_wrapper {
+  display: flex;
+  gap: 12px;
+  cursor: pointer;
+
+  color: #000;
+  font-family: Roboto, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+.checkbox_wrapper input {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+}
+
+/* ==========
+modal
+=====*/
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+}
+
+.modal_overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.modal_card {
+  position: relative;
+  margin: 0 auto;
+  top: 50%;
+  transform: translateY(-50%);
+
+  display: flex;
+  width: 484px;
+  padding: 36px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 13px;
+
+  border-radius: 12px;
+  background: #FFF;
+}
+
+.modal_title {
+  margin: 0;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+.modal_text {
+  margin: 0;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+.modal_actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+}

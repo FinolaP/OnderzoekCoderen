@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>Navigeren naar leesbegrip</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
   <header class="topbar">
     <div class="topbar_left">
-      <img class="topbar_icon" src="img/book.svg" alt="" aria-hidden="true" />
+      <img class="topbar_icon" src="../img/book.svg" alt="" aria-hidden="true" />
       <h1 class="topbar_title">Cito Leestoets</h1>
     </div>
   </header>
@@ -18,20 +18,20 @@
   <main class="page">
     <section class="content">
 
-      <!-- NEW wrapper for Figma-like auto layout spacing -->
+    
       <div class="content_stack">
 
         <p class="intro_text">
-Test of dit debat laat zien miauw miauw        </p>
+Je leest straks een tekst over het regenboogdieet. Daarna bedenk je voor- en tegenargumenten. Tot slot voer je een debat over dit onderwerp.       </p>
 
         <h2 class="question_text">Met wie wil jij in het team zitten voor een debat?</h2>
 
         <form class="choices" id="templateForm">
           <label class="choice">
-            <input type="radio" name="template" value="kleurrijk" />
+            <input type="radio" name="template" value="Team A" />
             <div class="choice_box">
-              <img class="choice_img" src="img/regenboog_presentatie.png" alt="Kleurrijk ontwerp" />
-              <div class="choice_label">Kleurrijk ontwerp</div>
+              <img class="choice_img" src="../img/gee_me_037.svg" alt="Groep A" />
+              <div class="choice_label">Groep A</div>
               <div class="choice_dot"></div>
             </div>
           </label>
@@ -39,17 +39,17 @@ Test of dit debat laat zien miauw miauw        </p>
           <label class="choice">
             <input type="radio" name="template" value="stoer" />
             <div class="choice_box">
-              <img class="choice_img" src="img/regenboog_stoer.png" alt="Stoer ontwerp" />
-              <div class="choice_label">Stoer ontwerp</div>
+              <img class="choice_img" src="../img/gee_me_081.svg" alt="Groep B" />
+              <div class="choice_label">Groep B</div>
               <div class="choice_dot"></div>
             </div>
           </label>
         </form>
 
         <div class="actions">
-          <button class="btn" id="nextBtn" disabled>
+          <button type="button" class="btn" id="debat_index_volgende" disabled>
             Volgende
-            <img class="btn_icon" src="img/arrow-right.svg" alt="" aria-hidden="true" />
+            <img class="btn_icon" src="../img/arrow-right.svg" alt="" aria-hidden="true" />
           </button>
         </div>
 
@@ -58,6 +58,6 @@ Test of dit debat laat zien miauw miauw        </p>
 
     </section>
   </main>
-
+<script src="../script.js"></script>
 </body>
 </html>

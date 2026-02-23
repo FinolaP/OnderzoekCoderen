@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>Navigeren naar leesbegrip</title>
+  <link rel="stylesheet" href="../style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+
+<body>
+  <header class="topbar">
+    <div class="topbar_left">
+      <img class="topbar_icon" src="../img/book.svg" alt="" aria-hidden="true" />
+      <h1 class="topbar_title">Cito Leestoets</h1>
+    </div>
+  </header>
+
+    <div class="content_stack">
+   <p class="intro_text">
+Je krijgt zo nog één keer de tekst over het regenboogdieet te zien. Lees goed, want je hebt de informatie nodig om team A te helpen in het debat. Als je klaar bent met lezen, verdwijnt de tekst. Je mag geen aantekeningen maken. 
+    </p>
+
+<label class="checkbox_wrapper">
+  <input type="checkbox" id="begrijp_check_tekst" />
+  Ik snap dat de tekst straks weg is en dat ik de vragen zonder de tekst moet maken
+</label>
+
+<div class="btn_wrapper">
+    <button type="button" class="btn_secondary" id="tekstweghalen_vorige">
+                    Vorige
+                    <img class="btn_icon" src="../img/Arrow left.svg" alt="" aria-hidden="true" />
+    </button>
+     <button type="button" class="btn" id="tekstweghalen_volgende" disabled>
+                    Volgende
+                    <img class="btn_icon" src="../img/arrow-right.svg" alt="" aria-hidden="true" />
+    </button>
+</div>
+<img class="debat_image" src="../img/Debat_regenboog.svg" alt="Regenboog afbeelding">
+</div>
+
+  <script src="../script.js"></script>
+</body>
+</html>
