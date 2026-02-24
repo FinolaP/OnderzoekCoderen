@@ -387,3 +387,79 @@ if (naarOpdracht) {
     window.location.href = "Debat_1.html";
   };
 }
+
+/* ================
+Antwoord optie display in tekstwolkje + enable Volgende when ready
+===============*/document.addEventListener("DOMContentLoaded", () => {
+
+  const speechHint = document.querySelector(".speech_hint");
+  const radios = document.querySelectorAll('input[name="teamA_reason"]');
+
+  const yesBtn = document.querySelector(".speech_btn_yes");
+  const noBtn = document.querySelector(".speech_btn_no");
+  const nextBtn = document.getElementById("debat_begin_volgende");
+
+  // If this page doesn't contain these elements, safely exit
+  if (!speechHint || radios.length === 0 || !yesBtn || !noBtn || !nextBtn) return;
+
+  // Start disabled
+  nextBtn.disabled = true;
+
+  function updateButtonState() {
+    const speechSelected =
+      yesBtn.classList.contains("active") ||
+      noBtn.classList.contains("active");
+
+    const radioSelected = Array.from(radios).some(r => r.checked);
+
+    nextBtn.disabled = !(speechSelected && radioSelected);
+  }
+
+  // Radio change → update speech bubble text
+  radios.forEach((radio) => {
+    radio.addEventListener("change", (e) => {
+      const label = e.target.closest(".answer");
+      const text = label.querySelector(".answer_text").textContent.trim();
+
+      speechHint.textContent = text;
+      speechHint.style.fontStyle = "normal";
+
+      updateButtonState();
+    });
+  });
+
+  // Wel button
+  yesBtn.addEventListener("click", () => {
+    yesBtn.classList.add("active");
+    noBtn.classList.remove("active");
+    updateButtonState();
+  });
+
+  // Niet button
+  noBtn.addEventListener("click", () => {
+    noBtn.classList.add("active");
+    yesBtn.classList.remove("active");
+    updateButtonState();
+  });
+
+  // Save selection + navigate
+  nextBtn.addEventListener("click", () => {
+
+    const speechChoice = yesBtn.classList.contains("active") ? "wel" : "niet";
+
+    const checkedRadio = Array.from(radios).find(r => r.checked);
+
+    let reasonText = "";
+    if (checkedRadio) {
+      const label = checkedRadio.closest(".answer");
+      reasonText = label.querySelector(".answer_text").textContent.trim();
+    }
+
+    // Store values for next page
+    localStorage.setItem("debate_speech_choice", speechChoice);
+    localStorage.setItem("debate_reason_text", reasonText);
+
+    window.location.href = "Debat_tegenreactie.html";
+  });
+
+});

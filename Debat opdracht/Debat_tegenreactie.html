@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Debat tegenreactie</title>
+  <link rel="stylesheet" href="../style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar_left">
+      <img class="topbar_icon" src="../img/book.svg" alt="" aria-hidden="true" />
+      <h1 class="topbar_title">Cito Leestoets</h1>
+    </div>
+  </header>
+
+  <div class="claim">
+    Het regenboogdieet is een betrouwbare manier om gezond te eten
+  </div>
+
+  <!-- Team A -->
+  <div class="team_A_row">
+    <div class="team_A_character">
+      <img id="team_A_img" src="../img/Team A_Praat.svg" alt="Team A" />
+    </div>
+
+    <div class="team_A_content">
+      <div class="speech" role="group" aria-label="Team A response">
+        <p class="speech_line">
+          Wij zijn het
+          <button type="button" class="speech_btn_yes" data-choice="wel">wel</button>
+          /
+          <button type="button" class="speech_btn_no" data-choice="niet">niet</button>
+          eens met de stelling, want
+        </p>
+
+        <!-- This will be replaced by the saved answer -->
+        <p class="speech_hint">...</p>
+      </div>
+
+      <!-- Keep the form in HTML, but JS will hide it -->
+      <form class="answers" aria-label="Antwoorden Team A">
+        <fieldset class="answers_fieldset">
+          <legend class="answers_legend">Kies één antwoord</legend>
+
+          <label class="answer">
+            <input class="answer_radio" type="radio" name="teamA_reason" value="a1" />
+            <span class="answer_text">het regenboogdieet zorgt ervoor dat mensen meer verschillende voedingsstoffen binnenkrijgen</span>
+          </label>
+
+          <label class="answer">
+            <input class="answer_radio" type="radio" name="teamA_reason" value="a2" />
+            <span class="answer_text">het regenboogdieet houdt rekening met alle belangrijke voedingsstoffen</span>
+          </label>
+
+          <label class="answer">
+            <input class="answer_radio" type="radio" name="teamA_reason" value="a3" />
+            <span class="answer_text">het regenboogdieet houdt geen rekening met alle belangrijke voedingsstoffen</span>
+          </label>
+
+          <label class="answer">
+            <input class="answer_radio" type="radio" name="teamA_reason" value="a4" />
+            <span class="answer_text">de tekst zegt dat het dieet niet betrouwbaar is</span>
+          </label>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
+  <!-- Team B -->
+  <section class="team_B_character">
+    <img id="team_B_img" src="../img/Team_B_Stil.svg" alt="Team B" />
+
+    <!-- NEW id so it doesn't reuse begin button logic -->
+    <button type="button" class="btn" id="debat_tegenreactie_volgende">
+      Volgende
+      <img class="btn_icon" src="../img/arrow-right.svg" alt="" aria-hidden="true" />
+    </button>
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const yesBtn = document.querySelector(".speech_btn_yes");
+      const noBtn = document.querySelector(".speech_btn_no");
+      const speechHint = document.querySelector(".speech_hint");
+      const answersForm = document.querySelector(".answers");
+
+      // Load saved values
+      const speechChoice = localStorage.getItem("debate_speech_choice"); // "wel" or "niet"
+      const reasonText = localStorage.getItem("debate_reason_text");     // selected answer text
+
+      // Fill the bubble with the saved answer
+      if (speechHint && reasonText) {
+        speechHint.textContent = reasonText;
+        speechHint.style.fontStyle = "normal";
+      }
+
+      // Set active state and lock the buttons
+      if (yesBtn && noBtn) {
+        yesBtn.classList.toggle("active", speechChoice === "wel");
+        noBtn.classList.toggle("active", speechChoice === "niet");
+
+        // Disable clicks
+        yesBtn.disabled = true;
+        noBtn.disabled = true;
+        yesBtn.style.pointerEvents = "none";
+        noBtn.style.pointerEvents = "none";
+      }
+
+      // Hide the radio form so nothing can change
+      if (answersForm) answersForm.style.display = "none";
+    });
+  </script>
+
+  <script src="../script.js"></script>
+</body>
+</html>
