@@ -17,7 +17,7 @@
 
 <div class="opdracht_layout">
 
-<section class="opdrachttekst">
+<section class="opdrachttekst markeertekst" id="markeertekst">
   <h1 class="leestekst_title">
     Het regenboogdieet: hoe meer kleuren hoe beter?
   </h1>
@@ -61,19 +61,47 @@
 </section>
 
 <aside class="opdracht_panel">
+  <div class="panel_card panel_statement">
+    Eet de regenboog. Hoe meer kleuren je eet, des te meer goede voedingsstoffen je krijgt.
+  </div>
 
-  
-</div>
+  <div class="panel_card panel_section">
+    <h2 class="panel_title">Argumenten voor</h2>
 
-    <button type="button" class="btn" id="debatopdracht1_volgende">
-              Volgende
-              <img class="btn_icon" src="../img/arrow-right.svg" alt="" aria-hidden="true" />
+    <button type="button" class="invulvak" data-side="voor" data-slot="1">
+      Klik om een zin te markeren uit de tekst
     </button>
 
+    <button type="button" class="invulvak" data-side="voor" data-slot="2">
+      Klik om een zin te markeren uit de tekst
+    </button>
 
+    <button type="button" class="invulvak" data-side="voor" data-slot="3">
+      Klik om een zin te markeren uit de tekst
+    </button>
+  </div>
+
+    <div class="panel_card panel_section panel_section-tegen">
+  <h2 class="panel_title panel_title-tegen">Argumenten tegen</h2>
+
+  <button type="button" class="invulvak" data-side="tegen" data-slot="1">
+    Klik om een zin te markeren uit de tekst
+  </button>
+
+  <button type="button" class="invulvak" data-side="tegen" data-slot="2">
+    Klik om een zin te markeren uit de tekst
+  </button>
+
+  <button type="button" class="invulvak" data-side="tegen" data-slot="3">
+    Klik om een zin te markeren uit de tekst
+  </button>
+</div>
+  <button type="button" class="btn" id="debatopdracht1_volgende">
+    Volgende
+    <img class="btn_icon" src="../img/arrow-right.svg" alt="" aria-hidden="true" />
+  </button>
 </aside>
 </div>
-
 <script src="../script.js"></script>
 </body>
 </html>

@@ -25,18 +25,11 @@
   <!-- Team A -->
   <div class="team_A_row">
     <div class="team_A_character">
-      <img id="team_A_img" src="../img/Team A_Praat.svg" alt="Team A" />
+      <img id="team_A_img" src="../img/Team_a_stil.svg" alt="Team A" />
     </div>
 
     <div class="team_A_content">
       <div class="speech" role="group" aria-label="Team A response">
-        <p class="speech_line">
-          Wij zijn het
-          <button type="button" class="speech_btn_yes" data-choice="wel">wel</button>
-          /
-          <button type="button" class="speech_btn_no" data-choice="niet">niet</button>
-          eens met de stelling, want
-        </p>
 
         <!-- This will be replaced by the saved answer -->
         <p class="speech_hint">...</p>
@@ -72,15 +65,20 @@
   </div>
 
   <!-- Team B -->
-  <section class="team_B_character">
-    <img id="team_B_img" src="../img/Team_B_Stil.svg" alt="Team B" />
+ <section class="team_B_character">
+ <div class="speech speech_b" role="group" aria-label="Team B response">
+  <p class="speech_hint" id="teamB_tegenreactie_text">
+    Je krijgt wel veel vitamines binnen, maar als je alleen regenboogkleuren eet, mis je belangrijke dingen zoals eiwitten en vitamine B12
+  </p>
+</div>
 
-    <!-- NEW id so it doesn't reuse begin button logic -->
-    <button type="button" class="btn" id="debat_tegenreactie_volgende">
-      Volgende
-      <img class="btn_icon" src="../img/arrow-right.svg" alt="" aria-hidden="true" />
-    </button>
-  </section>
+  <img id="team_B_img" src="../img/Team_B_Stil.svg" alt="Team B" />
+
+  <button type="button" class="btn" id="debat_tegenreactie_volgende">
+    Volgende
+    <img class="btn_icon" src="../img/arrow-right.svg" alt="" aria-hidden="true" />
+  </button>
+</section>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {

@@ -384,82 +384,346 @@ if (openBtn && modal) {
 
 if (naarOpdracht) {
   naarOpdracht.onclick = () => {
-    window.location.href = "Debat_1.html";
+    window.location.href = "Debat_Begin.html";
   };
 }
-
 /* ================
-Antwoord optie display in tekstwolkje + enable Volgende when ready
-===============*/document.addEventListener("DOMContentLoaded", () => {
-
-  const speechHint = document.querySelector(".speech_hint");
-  const radios = document.querySelectorAll('input[name="teamA_reason"]');
-
-  const yesBtn = document.querySelector(".speech_btn_yes");
-  const noBtn = document.querySelector(".speech_btn_no");
+Debat_begin (radio-only): update bubble + enable Volgende when a radio is chosen
+===============*/
+document.addEventListener("DOMContentLoaded", () => {
   const nextBtn = document.getElementById("debat_begin_volgende");
+  if (!nextBtn) return; // not on Debat_begin
 
-  // If this page doesn't contain these elements, safely exit
-  if (!speechHint || radios.length === 0 || !yesBtn || !noBtn || !nextBtn) return;
+  // Prefer a specific ID if you have it; otherwise first .speech_hint
+  const hintEl =
+    document.getElementById("teamA_begin_hint") ||
+    document.querySelector(".speech .speech_hint") ||
+    document.querySelector(".speech_hint");
 
-  // Start disabled
+  // Grab radios either by name OR by class (covers both setups)
+  const radios = document.querySelectorAll(
+    'input[name="teamA_reason"], .answers_fieldset input[type="radio"]'
+  );
+
+  if (!hintEl || radios.length === 0) return;
+
   nextBtn.disabled = true;
 
   function updateButtonState() {
-    const speechSelected =
-      yesBtn.classList.contains("active") ||
-      noBtn.classList.contains("active");
-
-    const radioSelected = Array.from(radios).some(r => r.checked);
-
-    nextBtn.disabled = !(speechSelected && radioSelected);
+    nextBtn.disabled = !Array.from(radios).some(r => r.checked);
   }
 
-  // Radio change → update speech bubble text
   radios.forEach((radio) => {
     radio.addEventListener("change", (e) => {
-      const label = e.target.closest(".answer");
-      const text = label.querySelector(".answer_text").textContent.trim();
+      const label = e.target.closest(".answer") || e.target.closest("label");
+      const text =
+        label?.querySelector(".answer_text")?.textContent?.trim() ||
+        label?.textContent?.trim() ||
+        "";
 
-      speechHint.textContent = text;
-      speechHint.style.fontStyle = "normal";
+      hintEl.textContent = text;
+      hintEl.style.fontStyle = "normal";
 
       updateButtonState();
     });
   });
 
-  // Wel button
-  yesBtn.addEventListener("click", () => {
-    yesBtn.classList.add("active");
-    noBtn.classList.remove("active");
-    updateButtonState();
-  });
-
-  // Niet button
-  noBtn.addEventListener("click", () => {
-    noBtn.classList.add("active");
-    yesBtn.classList.remove("active");
-    updateButtonState();
-  });
-
-  // Save selection + navigate
   nextBtn.addEventListener("click", () => {
-
-    const speechChoice = yesBtn.classList.contains("active") ? "wel" : "niet";
-
     const checkedRadio = Array.from(radios).find(r => r.checked);
+    if (!checkedRadio) return;
 
-    let reasonText = "";
-    if (checkedRadio) {
-      const label = checkedRadio.closest(".answer");
-      reasonText = label.querySelector(".answer_text").textContent.trim();
-    }
+    const label = checkedRadio.closest(".answer") || checkedRadio.closest("label");
+    const reasonText =
+      label?.querySelector(".answer_text")?.textContent?.trim() ||
+      label?.textContent?.trim() ||
+      "";
 
-    // Store values for next page
-    localStorage.setItem("debate_speech_choice", speechChoice);
     localStorage.setItem("debate_reason_text", reasonText);
+    localStorage.setItem("debate_reason_value", checkedRadio.value || "");
 
     window.location.href = "Debat_tegenreactie.html";
   });
 
+  updateButtonState();
 });
+
+/* ================
+Pages AFTER Debat_begin: show locked Team A answer (radio-only)
+===============*/
+document.addEventListener("DOMContentLoaded", () => {
+  const lockedReasonEl = document.getElementById("teamA_locked_reason");
+  if (!lockedReasonEl) return;
+
+  const reasonText = localStorage.getItem("debate_reason_text");
+  if (reasonText) {
+    lockedReasonEl.textContent = reasonText;
+    lockedReasonEl.style.fontStyle = "normal";
+  }
+});
+
+
+/* ================
+Debat_tegenreactie: Volgende -> Debat_reageren
+===============*/
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("debat_tegenreactie_volgende");
+  if (!btn) return;
+
+  btn.addEventListener("click", () => {
+    window.location.href = "Debat_reageren.html";
+  });
+});
+
+
+/* ================
+Debat_reageren: enable Volgende after choosing an option
+===============*/
+document.addEventListener("DOMContentLoaded", () => {
+  const reagerenForm = document.getElementById("reageren_form");
+  const reagerenHint = document.getElementById("reageren_hint");
+  const nextBtn = document.getElementById("debat_reageren_volgende");
+
+  // Not on Debat_reageren? exit safely.
+  if (!reagerenForm || !reagerenHint || !nextBtn) return;
+
+  nextBtn.disabled = true;
+  reagerenHint.textContent = "selecteer het juiste antwoord";
+  reagerenHint.style.fontStyle = "italic";
+
+  const radios = reagerenForm.querySelectorAll('input[name="reageren_reason"]');
+
+  radios.forEach((radio) => {
+    radio.addEventListener("change", (e) => {
+      const label = e.target.closest(".answer");
+      const text = label.querySelector(".answer_text").textContent.trim();
+
+      // show chosen option in bubble (optional)
+      reagerenHint.textContent = text;
+
+      reagerenHint.style.fontStyle = "normal";
+      nextBtn.disabled = false;
+
+      localStorage.setItem("debate_reageren_choice_text", text);
+      localStorage.setItem("debate_reageren_choice_value", e.target.value);
+    });
+  });
+
+  nextBtn.addEventListener("click", () => {
+    window.location.href = "Debat_volgende_pagina.html"; // change this
+  });
+});
+
+/* ================
+Debat_reageren: swap answer option texts based on Debat_begin choice (a1/a2 vs a3/a4)
+===============*/
+document.addEventListener("DOMContentLoaded", () => {
+  const reagerenForm = document.getElementById("reageren_form");
+  if (!reagerenForm) return;
+
+  const reasonValue = localStorage.getItem("debate_reason_value"); // "a1".."a4"
+  const isWelGroep = (reasonValue === "a1" || reasonValue === "a2");
+
+  const optionTextsWel = [
+    "Dat klopt, maar wij vinden nog steeds dat het regenboogdieet betrouwbaar is, want je eet veel verschillende gezonde producten.",
+    "Je hebt gelijk, daardoor is het regenboogdieet eigenlijk helemaal niet gezond",
+    "Je mist inderdaad sommige voedingsstoffen, maar het regenboogdieet kan wel een goede basis zijn als je daarnaast andere producten eet zoals zuivel of granen",
+    "Maar verschillende kleuren eten kan gezien worden als iets leuks, wat gezond eten beter vol te houden maakt"
+  ];
+
+  const optionTextsNiet = [
+    "Dat is waar, maar ik blijf erbij dat het dieet niet betrouwbaar is, want het mist belangrijke voedingsstoffen.",
+    "Je hebt geen gelijk want het regenboogdieet is niet betrouwbaar",
+    "Misschien, maar kleuren zeggen niks over gezondheid",
+    "Groenten en fruit zijn gezond, maar het is belangrijker dat een dieet makkelijk te volgen is"
+  ];
+
+  const textsToUse = isWelGroep ? optionTextsWel : optionTextsNiet;
+
+  // Replace the 4 option texts in the existing HTML
+  const spans = reagerenForm.querySelectorAll(".answer_text");
+  spans.forEach((span, i) => {
+    if (textsToUse[i]) span.textContent = textsToUse[i];
+  });
+
+  // Reset selection + disable next (prevents stale selection after text swap)
+  const nextBtn = document.getElementById("debat_reageren_volgende");
+  const hintEl = document.getElementById("reageren_hint");
+  const radios = reagerenForm.querySelectorAll('input[name="reageren_reason"]');
+
+  radios.forEach(r => (r.checked = false));
+  if (nextBtn) nextBtn.disabled = true;
+  if (hintEl) {
+    hintEl.textContent = "selecteer het juiste antwoord";
+    hintEl.style.fontStyle = "italic";
+  }
+});
+
+/* ================
+Set Team B tegenreactie text (Debat_tegenreactie + Debat_reageren)
+===============*/
+document.addEventListener("DOMContentLoaded", () => {
+  const teamBTextEl = document.getElementById("teamB_tegenreactie_text");
+  if (!teamBTextEl) return;
+
+  const reasonValue = localStorage.getItem("debate_reason_value"); // "a1".."a4"
+  console.log("TeamB tegenreactie reasonValue =", reasonValue);
+
+  const tegenreactie_wel =
+    "Je krijgt wel veel vitamines binnen, maar als je alleen regenboogkleuren eet, mis je belangrijke dingen zoals eiwitten en vitamine B12";
+
+  const tegenreactie_niet =
+    "Maar het regenboogdieet helpt je wél om veel gezonde groenten en fruit te eten. Die zitten vol vitamines die je lichaam nodig heeft. Het kan dus nog steeds heel gezond zijn";
+
+  const isWelGroep = (reasonValue === "a1" || reasonValue === "a2");
+
+  teamBTextEl.textContent = isWelGroep ? tegenreactie_wel : tegenreactie_niet;
+  teamBTextEl.style.fontStyle = "normal";
+});
+
+// =============================
+// STAP 2 - Zinnen klikbaar maken
+// Alleen actief binnen #markeertekst
+// =============================
+
+function splitIntoSentences(text) {
+  const matches = text.match(/[^.!?]+[.!?]+|[^.!?]+$/g);
+  return matches ? matches.map(s => s.trim()).filter(Boolean) : [text];
+}
+
+function maakZinnenKlikbaar() {
+  const container = document.getElementById("markeertekst");
+  if (!container) return;
+
+  const paragrafen = container.querySelectorAll(".leestekst_paragraph");
+
+  paragrafen.forEach(p => {
+    const origineleTekst = p.textContent.trim();
+    if (!origineleTekst) return;
+
+    const zinnen = splitIntoSentences(origineleTekst);
+
+    p.innerHTML = "";
+
+    zinnen.forEach(zin => {
+      const span = document.createElement("span");
+      span.className = "zin";
+    span.dataset.zinId = `${Date.now()}-${Math.random()}`;
+    span.textContent = zin + " ";
+      p.appendChild(span);
+    });
+  });
+}
+
+// uitvoeren
+maakZinnenKlikbaar();
+
+// =============================
+// STAP 4 - Invulvak -> zin kiezen (VOOR = groen, TEGEN = rood/roze)
+// =============================
+
+let actiefInvulvak = null;
+
+// 1) Klik op invulvak: zet actief (voor én tegen)
+document.querySelectorAll(".invulvak").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".invulvak").forEach(b => b.classList.remove("is-active"));
+    btn.classList.add("is-active");
+    actiefInvulvak = btn;
+  });
+});
+
+// 2) Klik op zin: alleen als er een invulvak actief is
+document.addEventListener("click", (e) => {
+  const zinEl = e.target.closest("#markeertekst .zin");
+  if (!zinEl) return;
+  if (!actiefInvulvak) return;
+
+  const side = actiefInvulvak.dataset.side;
+  const highlightClass = side === "tegen"
+    ? "is-highlight-tegen"
+    : "is-highlight-voor";
+
+  const huidigeZinId = zinEl.dataset.zinId;
+  const oudeZinId = actiefInvulvak.dataset.selectedId;
+
+  const isAlGemarkeerd =
+    zinEl.classList.contains("is-highlight-voor") ||
+    zinEl.classList.contains("is-highlight-tegen");
+
+  // Als de zin al gemarkeerd is door een ander vak: niets doen
+  if (isAlGemarkeerd && oudeZinId !== huidigeZinId) {
+    return;
+  }
+
+  // Als dezelfde zin opnieuw wordt aangeklikt: selectie verwijderen
+  if (oudeZinId === huidigeZinId) {
+    zinEl.classList.remove("is-highlight-voor");
+    zinEl.classList.remove("is-highlight-tegen");
+
+    actiefInvulvak.textContent = "Klik om een zin te markeren uit de tekst";
+    actiefInvulvak.classList.remove("filled");
+    actiefInvulvak.dataset.selectedId = "";
+    return;
+  }
+
+  // Oude highlight verwijderen als er al een zin gekozen was
+  if (oudeZinId) {
+    const oudeZinEl = document.querySelector(
+      `#markeertekst .zin[data-zin-id="${oudeZinId}"]`
+    );
+    if (oudeZinEl) {
+      oudeZinEl.classList.remove("is-highlight-voor");
+      oudeZinEl.classList.remove("is-highlight-tegen");
+    }
+  }
+
+  // Nieuwe highlight toepassen
+  zinEl.classList.add(highlightClass);
+
+  actiefInvulvak.textContent = zinEl.textContent.trim();
+  actiefInvulvak.dataset.selectedId = huidigeZinId;
+  actiefInvulvak.classList.add("filled");
+});
+
+
+/*===============================
+team kiezen
+===============================*/
+// Stap 1: keuze opslaan op de startpagina (groep A/B)
+(function () {
+  const form = document.getElementById("templateForm");
+  const nextBtn = document.getElementById("debat_index_volgende");
+  if (!form || !nextBtn) return; // Alleen uitvoeren op deze pagina
+
+  form.addEventListener("change", () => {
+    const checked = form.querySelector('input[name="template"]:checked');
+    if (!checked) return;
+
+    // We slaan A of B op (simpel en duidelijk)
+    const group =
+      checked.closest("label")?.querySelector(".choice_label")?.textContent?.trim() === "Groep A"
+        ? "A"
+        : "B";
+
+    localStorage.setItem("debatTeam", group);
+
+    nextBtn.disabled = false;
+  });
+})();
+
+// Stap 2: juiste team-afbeelding tonen op andere pagina's
+// Juiste team-afbeelding tonen
+(function () {
+  const img = document.getElementById("team_A_img");
+  if (!img) return;
+
+  const team = localStorage.getItem("debatTeam"); // "A" of "B"
+
+  if (team === "B") {
+    img.src = "../img/Team_jeff_praat.svg";
+    img.alt = "Team Jeff";
+  } else {
+    img.src = "../img/Team A_Praat.svg";
+    img.alt = "Team A";
+  }
+})();
