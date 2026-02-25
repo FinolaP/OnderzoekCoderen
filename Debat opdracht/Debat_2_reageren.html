@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Debat 2 reageren</title>
+  <link rel="stylesheet" href="../style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+  </style>
+</head>
+
+<body data-page="debat2-reageren">
+  <header class="topbar">
+    <div class="topbar_left">
+      <img class="topbar_icon" src="../img/book.svg" alt="" aria-hidden="true" />
+      <h1 class="topbar_title">Cito Leestoets</h1>
+    </div>
+  </header>
+
+  <div class="claim">
+    Het regenboogdieet is een betrouwbare manier om gezond te eten
+  </div>
+
+  <!-- TEAM A -->
+  <div class="team_A_row">
+    <div class="team_A_character">
+      <img id="team_A_img" src="../img/Team A_Praat.svg" alt="Team A" />
+    </div>
+
+    <div class="team_A_content">
+      <!-- Bubble 1: locked response -->
+      <div class="speech" role="group" aria-label="Team A response">
+        <p class="speech_hint" id="teamA_locked_reason">...</p>
+      </div>
+
+      <!-- Bubble 2: instruction -->
+      <div class="speech" role="group" aria-label="Opdracht">
+        <p class="speech_hint" id="reageren_hint">selecteer het juiste antwoord</p>
+      </div>
+
+      <!-- Form: 4 options -->
+      <form class="answers" id="reageren_form" aria-label="Antwoorden reageren">
+        <fieldset class="answers_fieldset">
+          <legend class="answers_legend">Kies één antwoord</legend>
+
+          <label class="answer">
+            <input class="answer_radio" type="radio" name="reageren_reason" value="r1" />
+            <span class="answer_text">test 1</span>
+          </label>
+
+          <label class="answer">
+            <input class="answer_radio" type="radio" name="reageren_reason" value="r2" />
+            <span class="answer_text">test 2</span>
+          </label>
+
+          <label class="answer">
+            <input class="answer_radio" type="radio" name="reageren_reason" value="r3" />
+            <span class="answer_text">test 3</span>
+          </label>
+
+          <label class="answer">
+            <input class="answer_radio" type="radio" name="reageren_reason" value="r4" />
+            <span class="answer_text">test 4</span>
+          </label>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
+  <!-- TEAM B -->
+  <section class="team_B_character">
+    <div class="speech speech_b" role="group" aria-label="Team B response">
+      <p class="speech_hint" id="teamB_tegenreactie_text">(fallback tekst)</p>
+    </div>
+
+    <img id="team_B_img" src="../img/Team_B_Stil.svg" alt="Team B" />
+
+    <button type="button" class="btn" id="debat2_reageren_volgende" disabled>
+      Volgende
+      <img class="btn_icon" src="../img/arrow-right.svg" alt="" aria-hidden="true" />
+    </button>
+  </section>
+
+  <script src="../script.js"></script>
+</body>
+</html>

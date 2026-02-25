@@ -509,7 +509,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   nextBtn.addEventListener("click", () => {
-    window.location.href = "Debat_volgende_pagina.html"; // change this
+    window.location.href = "Debat_stelling2.html"; // change this
   });
 });
 
@@ -661,9 +661,10 @@ document.addEventListener("click", (e) => {
     zinEl.classList.remove("is-highlight-tegen");
 
     actiefInvulvak.textContent = "Klik om een zin te markeren uit de tekst";
-    actiefInvulvak.classList.remove("filled");
-    actiefInvulvak.dataset.selectedId = "";
-    return;
+  actiefInvulvak.classList.remove("filled");
+  actiefInvulvak.dataset.selectedId = "";
+  updateVolgendeKnop();
+  return;
   }
 
   // Oude highlight verwijderen als er al een zin gekozen was
@@ -683,9 +684,27 @@ document.addEventListener("click", (e) => {
   actiefInvulvak.textContent = zinEl.textContent.trim();
   actiefInvulvak.dataset.selectedId = huidigeZinId;
   actiefInvulvak.classList.add("filled");
-});
+  updateVolgendeKnop();
+  });
 
+// Controleer of alle argument-vakken gevuld zijn voor volgende knop
+function updateVolgendeKnop() {
+  const nextBtn = document.getElementById("debatopdracht1_volgende");
+  if (!nextBtn) return;
 
+  const panel = document.querySelector(".opdracht_panel");
+  if (!panel) return;
+
+  const alleVakken = panel.querySelectorAll(".invulvak");
+
+  const allesGevuld = Array.from(alleVakken).every((vak) => {
+    return vak.classList.contains("filled") && vak.dataset.selectedId && vak.dataset.selectedId !== "";
+  });
+
+  nextBtn.disabled = !allesGevuld;
+}
+
+updateVolgendeKnop();
 /*===============================
 team kiezen
 ===============================*/
@@ -727,3 +746,191 @@ team kiezen
     img.alt = "Team A";
   }
 })();
+
+/* ==========================================
+   DEBAT RONDE 2 – COMPLETE FUNCTIONALITEIT
+========================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  /* ===============================
+     DEBAT_STELLING2
+  =============================== */
+  const stelling2Btn = document.getElementById("debat_stelling2_volgende");
+
+  if (stelling2Btn) {
+
+    const hintEl =
+      document.getElementById("teamA_begin_hint") ||
+      document.querySelector(".speech .speech_hint") ||
+      document.querySelector(".speech_hint");
+
+    const radios = document.querySelectorAll(
+      'input[name="teamA_reason"], .answers_fieldset input[type="radio"]'
+    );
+
+    stelling2Btn.disabled = true;
+
+    function updateButtonState() {
+      stelling2Btn.disabled = !Array.from(radios).some(r => r.checked);
+    }
+
+    radios.forEach((radio) => {
+      radio.addEventListener("change", (e) => {
+        const label = e.target.closest(".answer") || e.target.closest("label");
+        const text =
+          label?.querySelector(".answer_text")?.textContent?.trim() ||
+          label?.textContent?.trim() ||
+          "";
+
+        if (hintEl) {
+          hintEl.textContent = text;
+          hintEl.style.fontStyle = "normal";
+        }
+
+        updateButtonState();
+      });
+    });
+
+    stelling2Btn.addEventListener("click", () => {
+      const checkedRadio = Array.from(radios).find(r => r.checked);
+      if (!checkedRadio) return;
+
+      const label = checkedRadio.closest(".answer") || checkedRadio.closest("label");
+      const reasonText =
+        label?.querySelector(".answer_text")?.textContent?.trim() ||
+        label?.textContent?.trim() ||
+        "";
+
+      localStorage.setItem("debate2_reason_text", reasonText);
+      localStorage.setItem("debate2_reason_value", checkedRadio.value || "");
+
+      window.location.href = "Debat_2_tegenreactie.html";
+    });
+
+    updateButtonState();
+  }
+
+
+  /* ===============================
+     DEBAT_2_TEGENREACTIE
+  =============================== */
+  if (document.body.dataset.page === "debat2-tegenreactie") {
+
+    const teamALockedEl = document.getElementById("teamA_locked_reason");
+    const teamBTextEl = document.getElementById("teamB_tegenreactie_text");
+    const answersForm = document.querySelector(".answers");
+
+    const savedText = localStorage.getItem("debate2_reason_text");
+    const savedValue = localStorage.getItem("debate2_reason_value");
+
+    // Team A gekozen antwoord tonen
+    if (teamALockedEl) {
+      teamALockedEl.textContent = savedText || "...";
+      teamALockedEl.style.fontStyle = "normal";
+    }
+
+    // Oude opties verbergen
+    if (answersForm) {
+      answersForm.style.display = "none";
+    }
+
+    // Team B kip / vis tonen
+    if (teamBTextEl) {
+      if (savedValue === "a1" || savedValue === "a2") {
+        teamBTextEl.textContent = "kip";
+      } else if (savedValue === "a3" || savedValue === "a4") {
+        teamBTextEl.textContent = "vis";
+      } else {
+        teamBTextEl.textContent = "";
+      }
+
+      teamBTextEl.style.fontStyle = "normal";
+    }
+  }
+
+});
+
+/* ===============================
+DEBAT 2 – REAGEREN (opties wisselen + volgende activeren)
+=============================== */
+document.addEventListener("DOMContentLoaded", () => {
+  if (document.body.dataset.page !== "debat2-reageren") return;
+
+  const form = document.getElementById("reageren_form");
+  const hintEl = document.getElementById("reageren_hint");
+  const nextBtn = document.getElementById("debat2_reageren_volgende");
+  const teamALockedEl = document.getElementById("teamA_locked_reason");
+  const teamBTextEl = document.getElementById("teamB_tegenreactie_text");
+
+  if (!form || !hintEl || !nextBtn) return;
+
+  // Team A locked (uit ronde 2 stelling)
+  const savedAtext = localStorage.getItem("debate2_reason_text");
+  if (teamALockedEl) {
+    teamALockedEl.textContent = savedAtext || "...";
+    teamALockedEl.style.fontStyle = "normal";
+  }
+
+  // Team B tegenreactie tonen (optioneel)
+  const savedAvalue = localStorage.getItem("debate2_reason_value"); // a1..a4
+  const isA12 = (savedAvalue === "a1" || savedAvalue === "a2");
+  if (teamBTextEl) {
+    teamBTextEl.textContent = isA12 ? "kip" : "vis";
+    teamBTextEl.style.fontStyle = "normal";
+  }
+
+  // Antwoordopties wisselen
+  const textsA12 = ["test 1", "test 2", "test 3", "test 4"];
+  const textsA34 = ["la", "tra", "qa", "ma"];
+  const textsToUse = isA12 ? textsA12 : textsA34;
+
+  const spans = form.querySelectorAll(".answer_text");
+  spans.forEach((span, i) => {
+    if (textsToUse[i]) span.textContent = textsToUse[i];
+  });
+
+  // Init state
+  nextBtn.disabled = true;
+  hintEl.textContent = "selecteer het juiste antwoord";
+  hintEl.style.fontStyle = "italic";
+
+  const radios = form.querySelectorAll('input[name="reageren_reason"]');
+  radios.forEach(r => (r.checked = false));
+
+  radios.forEach((radio) => {
+    radio.addEventListener("change", (e) => {
+      const label = e.target.closest(".answer") || e.target.closest("label");
+      const text =
+        label?.querySelector(".answer_text")?.textContent?.trim() ||
+        label?.textContent?.trim() ||
+        "";
+
+      hintEl.textContent = text;
+      hintEl.style.fontStyle = "normal";
+      nextBtn.disabled = false;
+
+      localStorage.setItem("debate2_reageren_choice_text", text);
+      localStorage.setItem("debate2_reageren_choice_value", e.target.value);
+    });
+  });
+
+  nextBtn.addEventListener("click", () => {
+    // Pas dit aan naar jouw volgende Debat 2 pagina
+    window.location.href = "Debat_2_volgende_pagina.html";
+  });
+});
+
+/* ===============================
+Debat_2_tegenreactie: Volgende -> Debat_2_reageren.html
+=============================== */
+document.addEventListener("DOMContentLoaded", () => {
+  if (document.body.dataset.page !== "debat2-tegenreactie") return;
+
+  const btn = document.getElementById("debat_tegenreactie_volgende");
+  if (!btn) return;
+
+  btn.addEventListener("click", () => {
+    window.location.href = "Debat_2_reageren.html";
+  });
+});

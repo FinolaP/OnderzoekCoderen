@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Debat tegenreactie 2</title>
+  <link rel="stylesheet" href="../style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+  </style>
+</head>
+
+<body data-page="debat2-tegenreactie">
+
+  <header class="topbar">
+    <div class="topbar_left">
+      <img class="topbar_icon" src="../img/book.svg" alt="" aria-hidden="true" />
+      <h1 class="topbar_title">Cito Leestoets</h1>
+    </div>
+  </header>
+
+  <!-- AANGEPASTE STELLING -->
+  <div class="claim">
+    De slogan ‘Eet de regenboog’ is vooral een slimme reclame.
+  </div>
+
+  <!-- Team A -->
+  <div class="team_A_row">
+    <div class="team_A_character">
+      <img id="team_A_img" src="../img/Team_a_stil.svg" alt="Team A" />
+    </div>
+
+    <div class="team_A_content">
+      <div class="speech" role="group" aria-label="Team A response">
+        <!-- Hier komt automatisch het eerder gekozen antwoord -->
+        <p class="speech_hint" id="teamA_locked_reason">...</p>
+      </div>
+
+      <!-- Form blijft in HTML maar wordt verborgen via JS -->
+      <form class="answers" aria-label="Antwoorden Team A">
+        <fieldset class="answers_fieldset">
+          <legend class="answers_legend">Kies één antwoord</legend>
+
+          <label class="answer">
+            <input class="answer_radio" type="radio" name="teamA_reason" value="a1" />
+            <span class="answer_text">
+              de slogan is misleidend doordat je belangrijke voedingsstoffen mist als je alleen op kleuren let
+            </span>
+          </label>
+
+          <label class="answer">
+            <input class="answer_radio" type="radio" name="teamA_reason" value="a2" />
+            <span class="answer_text">
+              supermarkten gebruiken de slogan om duurdere kleurrijke producten te verkopen, zoals blauwe bessen
+            </span>
+          </label>
+
+          <label class="answer">
+            <input class="answer_radio" type="radio" name="teamA_reason" value="a3" />
+            <span class="answer_text">
+              volgens de hoogleraar is het een prima richtlijn voor gezondheid, zolang je gevarieerd eet
+            </span>
+          </label>
+
+          <label class="answer">
+            <input class="answer_radio" type="radio" name="teamA_reason" value="a4" />
+            <span class="answer_text">
+              wie volgens de regenboog eet krijgt alle voedingsstoffen die nodig zijn om gezond te bewegen
+            </span>
+          </label>
+
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
+  <!-- Team B -->
+  <section class="team_B_character">
+
+    <div class="speech speech_b" role="group" aria-label="Team B response">
+      <p class="speech_hint" id="teamB_tegenreactie_text">
+        <!-- Wordt via JS vervangen door "kip" of "vis" -->
+      </p>
+    </div>
+
+    <img id="team_B_img" src="../img/Team_B_Stil.svg" alt="Team B" />
+
+    <button type="button" class="btn" id="debat_tegenreactie_volgende">
+      Volgende
+      <img class="btn_icon" src="../img/arrow-right.svg" alt="" aria-hidden="true" />
+    </button>
+
+  </section>
+
+  <script src="../script.js"></script>
+</body>
+</html>
