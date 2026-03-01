@@ -531,10 +531,10 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   const optionTextsNiet = [
-    "Dat is waar, maar ik blijf erbij dat het dieet niet betrouwbaar is, want het mist belangrijke voedingsstoffen.",
-    "Je hebt geen gelijk want het regenboogdieet is niet betrouwbaar",
-    "Misschien, maar kleuren zeggen niks over gezondheid",
-    "Groenten en fruit zijn gezond, maar het is belangrijker dat een dieet makkelijk te volgen is"
+    "Team B heeft gelijk, maar wij blijven erbij dat het regenboogdieet niet betrouwbaar is, omdat je volgens de tekst niet alle belangrijke voedingsstoffen binnenkrijgt.",
+    "Team B heeft geen gelijk want het regenboogdieet is niet betrouwbaar.",
+    "Team B heeft gelijk, dus ons eerdere argument klopt niet meer en het regenboogdieet is wel betrouwbaar.",
+    "Team B heeft geen gelijk, want groenten en fruit zijn niet belangrijk voor je gezondheid."
   ];
 
   const textsToUse = isWelGroep ? optionTextsWel : optionTextsNiet;
