@@ -524,10 +524,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const isWelGroep = (reasonValue === "a1" || reasonValue === "a2");
 
   const optionTextsWel = [
-    "Dat klopt, maar wij vinden nog steeds dat het regenboogdieet betrouwbaar is, want je eet veel verschillende gezonde producten.",
-    "Je hebt gelijk, daardoor is het regenboogdieet eigenlijk helemaal niet gezond",
-    "Je mist inderdaad sommige voedingsstoffen, maar het regenboogdieet kan wel een goede basis zijn als je daarnaast andere producten eet zoals zuivel of granen",
-    "Maar verschillende kleuren eten kan gezien worden als iets leuks, wat gezond eten beter vol te houden maakt"
+    "Team B heeft gelijk, dus het regenboogdieet is minder gezond dan wij eerst dachten, omdat je belangrijke voedingsstoffen kunt missen",
+    "Team B heeft geen gelijk, want je krijgt juist veel verschillende vitamines binnen door het regenboogdieet.",
+    "Team B heeft gelijk, dus het regenboogdieet is niet betrouwbaar",
+    "Team B heeft geen gelijk, want het regenboogdieet is betrouwbaar"
   ];
 
   const optionTextsNiet = [
