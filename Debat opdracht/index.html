@@ -7,6 +7,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
+<div id="afname_overlay" style="
+  position:fixed;
+  inset:0;
+  background:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  font-family:sans-serif;
+">
+  <div style="text-align:center">
+    <h2>Voer je code in</h2>
+    <input id="afname_input" placeholder="Code">
+    <br><br>
+    <button id="start_afname">Start</button>
+  </div>
+</div>
+
 <body>
   <header class="topbar">
     <div class="topbar_left">
@@ -21,7 +39,7 @@
     
       <div class="content_stack">
 
-        <p class="intro_text">
+        <p class="intro_text intro_text_center">
 Je leest straks een tekst over het regenboogdieet. Daarna markeer je voor- en tegenargumenten. Tot slot voer je een debat over dit onderwerp.       </p>
 
         <h2 class="question_text">Met wie wil jij in het team zitten voor een debat?</h2>

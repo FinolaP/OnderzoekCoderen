@@ -1,6 +1,118 @@
 // Check of JavaScript geladen is
 console.log("JavaScript gestart");
 
+// ==============================
+// LEERLING CODE OPSLAAN
+// ==============================
+const CODE_KEY = "leerling_code_v1";
+
+function getLeerlingCode() {
+  return localStorage.getItem(CODE_KEY) || "onbekend";
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const overlay = document.getElementById("afname_overlay");
+  const input = document.getElementById("afname_input");
+  const btn = document.getElementById("start_afname");
+
+  console.log("Overlay gevonden:", overlay, input, btn);
+
+  if (!overlay || !input || !btn) return;
+
+  const bestaandeCode = localStorage.getItem(CODE_KEY);
+
+  // Als er al een code is → overlay verbergen
+  if (bestaandeCode) {
+    overlay.style.display = "none";
+    return;
+  }
+
+  btn.addEventListener("click", () => {
+    const code = input.value.trim();
+
+    if (!code) {
+      alert("Vul een code in");
+      return;
+    }
+
+    console.log("Code opgeslagen:", code);
+
+    localStorage.setItem(CODE_KEY, code);
+
+    // timer resetten
+    localStorage.removeItem("afname_start_ms_v1");
+
+    overlay.style.display = "none";
+  });
+
+});
+// ==============================
+// LOGGER (localStorage)
+// ==============================
+const LOG_KEY = "afname_log_v1";
+const START_KEY = "afname_start_ms_v1";
+
+function ensureStartTime() {
+  let start = localStorage.getItem(START_KEY);
+  if (!start) {
+    start = String(Date.now());
+    localStorage.setItem(START_KEY, start);
+  }
+  return Number(start);
+}
+
+function getLog() {
+  try { return JSON.parse(localStorage.getItem(LOG_KEY)) || []; }
+  catch { return []; }
+}
+
+function addLog(eventType, data = {}) {
+  const startMs = ensureStartTime();
+  const nowMs = Date.now();
+
+  const entry = {
+    leerling_code: getLeerlingCode(),
+    t_iso: new Date(nowMs).toISOString(),
+    dt_ms: nowMs - startMs, // tijd sinds eerste gelogde actie
+    page: window.location.pathname.split("/").pop() || "unknown",
+    eventType,
+    ...data
+  };
+
+  const log = getLog();
+  log.push(entry);
+  localStorage.setItem(LOG_KEY, JSON.stringify(log));
+
+  console.log("[LOG]", entry);
+}
+
+// Handig terugkijken / wissen
+window.showLog = () => console.table(getLog());
+window.clearLog = () => {
+  localStorage.removeItem(LOG_KEY);
+  localStorage.removeItem(START_KEY);
+  console.log("Log gewist");
+};
+
+// ==============================
+// RADIO LOG (alle radio buttons op alle pagina's)
+// ==============================
+document.addEventListener("change", (e) => {
+  const r = e.target.closest('input[type="radio"]');
+  if (!r) return;
+
+  // probeer labeltekst mee te nemen (handig bij analyse)
+  const label = r.closest("label") || document.querySelector(`label[for="${r.id}"]`);
+  const labelText = label?.innerText?.trim() || "";
+
+  addLog("radio", {
+    name: r.name || "",
+    id: r.id || "",
+    value: r.value || "",
+    labelText
+  });
+});
 /* =========================
    INDEX.HTML – RADIO KEUZE
 ========================= */
@@ -616,7 +728,6 @@ function maakZinnenKlikbaar() {
 
 // uitvoeren
 maakZinnenKlikbaar();
-
 // =============================
 // STAP 4 - Invulvak -> zin kiezen (VOOR = groen, TEGEN = rood/roze)
 // =============================
@@ -629,6 +740,16 @@ document.querySelectorAll(".invulvak").forEach((btn) => {
     document.querySelectorAll(".invulvak").forEach(b => b.classList.remove("is-active"));
     btn.classList.add("is-active");
     actiefInvulvak = btn;
+
+    // --- LOG (toegevoegd, verandert niks aan werking) ---
+    if (typeof addLog === "function") {
+      addLog("invulvak_actief", {
+        side: btn.dataset.side || "",
+        invulvakId: btn.id || "",
+        currentSelectedId: btn.dataset.selectedId || "",
+        currentText: (btn.textContent || "").trim()
+      });
+    }
   });
 });
 
@@ -661,10 +782,21 @@ document.addEventListener("click", (e) => {
     zinEl.classList.remove("is-highlight-tegen");
 
     actiefInvulvak.textContent = "Klik om een zin te markeren uit de tekst";
-  actiefInvulvak.classList.remove("filled");
-  actiefInvulvak.dataset.selectedId = "";
-  updateVolgendeKnop();
-  return;
+    actiefInvulvak.classList.remove("filled");
+    actiefInvulvak.dataset.selectedId = "";
+    updateVolgendeKnop();
+
+    // --- LOG (toegevoegd, verandert niks aan werking) ---
+    if (typeof addLog === "function") {
+      addLog("markering_verwijderd", {
+        side: side || "",
+        invulvakId: actiefInvulvak.id || "",
+        zinId: huidigeZinId || "",
+        zinText: (zinEl.textContent || "").trim()
+      });
+    }
+
+    return;
   }
 
   // Oude highlight verwijderen als er al een zin gekozen was
@@ -685,7 +817,17 @@ document.addEventListener("click", (e) => {
   actiefInvulvak.dataset.selectedId = huidigeZinId;
   actiefInvulvak.classList.add("filled");
   updateVolgendeKnop();
-  });
+
+  // --- LOG (toegevoegd, verandert niks aan werking) ---
+  if (typeof addLog === "function") {
+    addLog("markering_geplaatst", {
+      side: side || "",
+      invulvakId: actiefInvulvak.id || "",
+      zinId: huidigeZinId || "",
+      zinText: (zinEl.textContent || "").trim()
+    });
+  }
+});
 
 // Controleer of alle argument-vakken gevuld zijn voor volgende knop
 function updateVolgendeKnop() {

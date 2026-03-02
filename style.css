@@ -72,6 +72,9 @@ body {
   font-weight: 400;
   line-height: 140%;
 }
+.intro_text_center {
+  text-align: center;
+}
 
 /* Question text (your HTML uses .question_text) */
 .question_text {
@@ -111,7 +114,12 @@ p {
   margin: 8px;
 }
 
-
+.opdracht_panel li {
+  font-size: 18px;
+}
+.opdracht_panel p + ul {
+  margin-top: 0;
+}
 
 /* Template choices layout (70px between boxes) */
 .choices {
