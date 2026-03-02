@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <title>Einde</title>
+</head>
+<body style="font-family:sans-serif;text-align:center;margin-top:80px;">
+
+  <h1>Bedankt!</h1>
+  <p>Je bent klaar. Klik hieronder voor de volgende leerling.</p>
+
+  <button id="nieuwe_afname" type="button">Volgende leerling</button>
+
+  <script>
+    document.getElementById("nieuwe_afname").addEventListener("click", () => {
+      // Alleen resetten voor nieuwe leerling (log blijft!)
+      localStorage.removeItem("leerling_code_v1");
+      localStorage.removeItem("afname_start_ms_v1");
+
+      // Terug naar start (pas aan als jouw index in een andere map staat)
+      window.location.href = "index.html";
+    });
+  </script>
+
+</body>
+</html>

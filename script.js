@@ -621,7 +621,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   nextBtn.addEventListener("click", () => {
-    window.location.href = "Debat_stelling2.html"; // change this
+    window.location.href = "einde.html"; // change this
   });
 });
 
@@ -1075,4 +1075,24 @@ document.addEventListener("DOMContentLoaded", () => {
   btn.addEventListener("click", () => {
     window.location.href = "Debat_2_reageren.html";
   });
+});
+
+// ==============================
+// EINDE PAGINA → NIEUWE LEERLING
+// ==============================
+document.addEventListener("DOMContentLoaded", () => {
+
+  const btn = document.getElementById("nieuwe_afname");
+  if (!btn) return;
+
+  btn.addEventListener("click", () => {
+
+    // Alleen sessie resetten
+    localStorage.removeItem("leerling_code_v1");
+    localStorage.removeItem("afname_start_ms_v1");
+
+    // terug naar begin
+    window.location.href = "index.html";
+  });
+
 });
