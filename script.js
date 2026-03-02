@@ -621,7 +621,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   nextBtn.addEventListener("click", () => {
-    window.location.href = "einde.html"; // change this
+    window.location.href = "Einde.html"; // change this
   });
 });
 
